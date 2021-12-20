@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <base href="/" />
-    <title>hzswdef | Social tab</title>
+    <title>URL Shorter</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/style.css">
     <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon">
@@ -19,8 +19,14 @@
 </div>
 
 <div class="main-block">
-    <div class="profile">
-        yo
+    <div class="form">
+        <input id="url-input" placeholder="example.xyz">
+        
+        <button id="send_request">shorten</button>
+        
+        <span class="url-counter unselectable">
+            <? echo "yo"; ?>
+        </span>
     </div>
 </div>
 
@@ -28,6 +34,7 @@
 
 <script src="js/jquery-3.6.0.js"></script>
 <script src="js/loading.js"></script>
+<script src="js/send_request.js"></script>
 
 </body>
 </html>
