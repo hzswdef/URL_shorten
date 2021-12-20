@@ -26,7 +26,7 @@ if ($result == null)
 }
 else
 {
-    header("Location:" . $result["point"]);
+    header("Location: https://" . $result["point"]);
 }
 
 ?>
