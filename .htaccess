@@ -2,7 +2,7 @@ DirectoryIndex index.php
 
 AddDefaultCharset UTF-8
 
-ErrorDocument 404 /404.php
+ErrorDocument 404 /check_url.php
 ErrorDocument 403 /403.php
 
 RewriteEngine On
@@ -13,8 +13,12 @@ RewriteRule ^(.+)/$ $1.php [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule .*[^/]$ %{REQUEST_URI}/ [L,R=301]
 
-<FilesMatch ".(htaccess|htpasswd|ini|phps|fla|psd|log|sh)$">
+<FilesMatch ".(htaccess|htpasswd|sql|ini|phps|fla|psd|log|sh)$">
     Order Allow,Deny
     Deny from all
 </FilesMatch>
 
+<FilesMatch "check_url.php">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>

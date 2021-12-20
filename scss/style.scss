@@ -124,6 +124,32 @@ html, body {
     }
 }
 
+#msg_box {
+    position: absolute;
+    left: 50%; top: 10px;
+    width: 320px;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    
+    & span {
+        padding: 5px 10px;
+        border: .1rem solid lime;
+        border-radius: 15px;
+        color: white;
+        font-family: Dongle-Regular;
+        font-size: 1.2rem;
+        margin: 0 0 10px 0;
+        
+        & p {
+            font-family: Dongle-Light;
+            font-size: 1rem;
+        }
+    }
+}
+
 @keyframes rotate {
   100% {
     transform: rotate(360deg);

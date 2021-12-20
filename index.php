@@ -18,6 +18,8 @@
     </svg>
 </div>
 
+<div id="msg_box"></div>
+
 <div class="main-block">
     <div class="form">
         <input id="url-input" placeholder="example.xyz">
