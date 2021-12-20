@@ -17,8 +17,3 @@ RewriteRule .*[^/]$ %{REQUEST_URI}/ [L,R=301]
     Order Allow,Deny
     Deny from all
 </FilesMatch>
-
-<FilesMatch "check_url.php">
-    Order Allow,Deny
-    Deny from all
-</FilesMatch>
