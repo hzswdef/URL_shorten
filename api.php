@@ -67,6 +67,7 @@ $mysql_connect->query("INSERT INTO `tokens` (`used`) VALUES ('used'='used'+1) WH
 
 mysqli_close($mysql_connect);
 
-echo "{ \"url\": \"https://url.hzswdef.xyz/$random_url\" }";
+echo "https://url.hzswdef.xyz/" . $random_url;
+//echo "{ \"url\": \"https://url.hzswdef.xyz/$random_url\" }";
 
 ?>
