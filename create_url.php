@@ -39,7 +39,7 @@ function create_random_url($mysql_connect)
 
 $random_url = create_random_url($mysql_connect);
 
-$result = $mysql_connect->query("INSERT INTO `shorten urls` (`url`, `point`) VALUES ('$random_url', '$point', 'NONE')");
+$result = $mysql_connect->query("INSERT INTO `shorten urls` (`url`, `point`, `token`) VALUES ('$random_url', '$point', 'NONE')");
 
 mysqli_close($mysql_connect);
 
