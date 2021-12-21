@@ -9,6 +9,9 @@ if ((strlen($point) <= 3) || (strpos($point, ".") == false))
     exit();
 }
 
+$point = str_replace("https://", "", $point);
+$point = str_replace("http://", "", $point);
+
 require("lib/db.php");
 
 $mysql_connect = new mysqli(
