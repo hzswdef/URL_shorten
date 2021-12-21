@@ -63,11 +63,11 @@ function create_random_url($mysql_connect)
 $random_url = create_random_url($mysql_connect);
 
 $mysql_connect->query("INSERT INTO `shorten urls` (`url`, `point`, `token`) VALUES ('$random_url', '$point', '$token')");
-$mysql_connect->query("INSERT INTO `tokens` (`used`) VALUES ('used'='used'+1) WHERE `token`='$token'");
+$mysql_connect->query("UPDATE `tokens` SET `used`=`used`+1 WHERE `token`='$token'");
 
 mysqli_close($mysql_connect);
 
-echo "https://url.hzswdef.xyz/" . $random_url;
-//echo "{ \"url\": \"https://url.hzswdef.xyz/$random_url\" }";
+//echo "https://url.hzswdef.xyz/" . $random_url;
+echo "{ \"url\": \"https://url.hzswdef.xyz/$random_url\" }";
 
 ?>
