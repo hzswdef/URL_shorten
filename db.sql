@@ -3,9 +3,9 @@ CREATE TABLE `shorten urls` (
     url CHAR(6),
     point VARCHAR(256),
     token CHAR(16)
-)
+);
 
 CREATE TABLE `tokens` (
     token CHAR(16) PRIMARY KEY,
     used INT(11) UNSIGNED
-)
+);
