@@ -69,7 +69,7 @@ html, body {
   border-radius: 0 16px 0 0;
   display: inline-block;
   vertical-align: middle;
-  background: linear-gradient(60deg, #5f86f2, #a65ff2, #f25fd0, #f25f61, #f2cb5f);
+  background: linear-gradient(60deg, hsl(224deg, 85%, 66%), hsl(269deg, 85%, 66%), hsl(314deg, 85%, 66%), hsl(359deg, 85%, 66%), hsl(44deg, 85%, 66%));
   background-size: 300% 300%;
   animation: moveGradient 4s alternate infinite;
   border-radius: 0 15px 0 0;

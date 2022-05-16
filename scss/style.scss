@@ -134,6 +134,10 @@ html, body {
     flex-direction: column;
     text-align: center;
     
+    & .error {
+        border: .1rem solid red !important;
+    }
+    
     & span {
         padding: 5px 10px;
         border: .1rem solid lime;
@@ -143,6 +147,7 @@ html, body {
         font-size: 1.2rem;
         margin: 0 0 10px 0;
         
+
         & p {
             font-family: Dongle-Light;
             font-size: 1rem;
