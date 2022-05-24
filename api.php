@@ -19,30 +19,32 @@ class MySQL
     private $conn; // database connection
     
     public function __construct() {
-        self::db_connect();
+        $this->conn = self::db_connect();
     }
     
     // connect to database
-    private function db_connect()
+    private static function db_connect()
     {
         // database config
         require("lib/db.php");
         
         mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
         try {
-            $this->conn = new mysqli(
+            $conn = new mysqli(
                 $host,
                 $user,
                 $pass,
                 $db_name
             );
-        } catch (Exception $e) {
+        } catch (Exception $error) {
             header("HTTP/1.1 500 Internal Server Error");
             
-            die("Troubles with database, try later.");
+            die("Troubles with database, try later.\n\n$");
         }
         
-        $this->conn->set_charset("utf8");
+        $conn->set_charset("utf8");
+        
+        return $conn;
     }
     
     public function close()
@@ -148,7 +150,7 @@ function get_server_protocol() {
     }
 }
 
-$url = get_server_protocol() . $_SERVER['HTTP_HOST'] . '/' . $short_url;
+$url = get_serverprotocol() . $_SERVER['HTTP_HOST'] . '/' . $short_url;
 
 // Return response with JSON data
 echo "{ \"url\": \"$url\" }";
