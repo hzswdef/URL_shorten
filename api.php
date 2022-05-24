@@ -2,7 +2,7 @@
 
 if (!isset($_GET["token"]))
 {
-    echo "Unauthorized token. Access denied.";
+    echo "No token specified.";
     exit();
 }
 if (!isset($_GET["url"]))
@@ -14,63 +14,143 @@ if (!isset($_GET["url"]))
 $token = $_GET["token"];
 $point = $_GET["url"];
 
-// Basic url check if he is valid
-if ((strlen($point) <= 3) || (strpos($point, ".") == false))
+class MySQL
 {
-    echo "Invalid URL.";
-    exit();
-}
-
-// Connect to database
-require("lib/db.php");
-$mysql_connect = new mysqli(
-    $host,
-    $user,
-    $pass,
-    $db_name
-);
-mysqli_set_charset($mysql_connect, "utf8");
-
-// BEGIN | Check given token to authorize system
-$check_token = $mysql_connect->query("SELECT `token` FROM `tokens` WHERE `token`='$token'");
-$check_token = mysqli_fetch_array($check_token);
-
-if ($check_token == null)
-{
-    echo "Invalid TOKEN. Access denied.";
-    exit();
-}
-// END
-
-// Create unique random chars
-function create_random_url($mysql_connect)
-{
-    $rand_chars = substr(md5(mt_rand()), 0, 5);
+    private $conn; // database connection
     
-    // BEGIN | Check if entry with randomed code 
-    $check = $mysql_connect->query("SELECT * FROM `shorten urls` WHERE `url`='$rand_chars'");
-    $check = mysqli_fetch_array($check);
-    
-    // Invoke this func again if entry with $rand_chars already exists in DB
-    if ($check !== null)
-    {
-        return create_random_url($mysql_connect);
+    public function __construct() {
+        self::db_connect();
     }
-    // END
     
-    return $rand_chars;
+    // connect to database
+    private function db_connect()
+    {
+        // database config
+        require("lib/db.php");
+        
+        mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+        try {
+            $this->conn = new mysqli(
+                $host,
+                $user,
+                $pass,
+                $db_name
+            );
+        } catch (Exception $e) {
+            header("HTTP/1.1 500 Internal Server Error");
+            
+            die("Troubles with database, try later.");
+        }
+        
+        $this->conn->set_charset("utf8");
+    }
+    
+    public function close()
+    {
+        mysqli_close($this->conn);
+    }
+    
+    // check if token exists in db
+    public function check_token(string $token)
+    {
+        $res = $this->conn->query("SELECT * FROM `tokens` WHERE `token`='$token'");
+        
+        if (mysqli_fetch_array($res) == null) {
+            header("HTTP/1.1 403 Internal Server Error");
+            
+            die("Unauthorized token. Access denied.");
+        }
+    }
+    
+    // check if id for new short url already exists in db
+    public function check_url_exists(string $url)
+    {
+        $res = $this->conn->query("SELECT * FROM `shorten urls` WHERE `url`='$url'");
+        
+        if (mysqli_fetch_array($res) !== null) {
+            return true;
+        }
+        return false;
+    }
+    
+    // add new short url entry to db
+    public function insert_new_entry(string $url, string $point, string $token)
+    {
+        $this->conn->query("INSERT INTO `shorten urls` (`url`, `point`, `token`) VALUES ('$url', '$point', '$token')");
+        
+        self::update_token_uses($token);
+    }
+    
+    private function update_token_uses(string $token)
+    {
+        $this->conn->query("UPDATE `tokens` SET `used`=`used`+1 WHERE `token`='$token'");
+    }
 }
-$random_url = create_random_url($mysql_connect);
 
-// Add new "short url" entry to DB
-$mysql_connect->query("INSERT INTO `shorten urls` (`url`, `point`, `token`) VALUES ('$random_url', '$point', '$token')");
+class API extends MySQL
+{
+    private $token;
+    
+    public function __construct(string $token)
+    {
+        parent::__construct();
+        parent::check_token($token);
+        $this->token = $token;
+    }
+    
+    public function create_url(string $point)
+    {
+        $rand_chars = substr(md5(mt_rand()), 0, 5);
+        
+        if ($this->check_url_exists($rand_chars)) {
+            return self::create_url();
+        }
+        $this->insert_new_entry($rand_chars, $point, $this->token);
+        
+        return $rand_chars;
+    }
+    
+    public function point_validation(string $point)
+    {
+        if (!preg_match("/^((https|http|ftp)\:\/\/)?([a-z0-9A-Z]+\.[a-z0-9A-Z]+\.[a-z0-9A-Z]+\.[a-zA-Z]{2,4}|[a-z0-9A-Z]+\.[a-z0-9A-Z]+\.[a-zA-Z]{2,4}|[a-z0-9A-Z]+\.[a-zA-Z]{2,4})$/i", $point)) {
+            header("HTTP/1.1 400 Bad Request");
+            
+            die("Bad URL.");
+        }
+        
+        if(!$socket =@ fsockopen($point, 80, $errno, $errstr, 30)) {
+            header("HTTP/1.1 400 Bad Request");
+            
+            die("URL not responding.");
+        }
+        fclose($socket);
+    }
+}
 
-// Update token usage count in DB
-$mysql_connect->query("UPDATE `tokens` SET `used`=`used`+1 WHERE `token`='$token'");
+$api = new API($token);
 
-mysqli_close($mysql_connect);
+$api->point_validation($point);
+$short_url = $api->create_url($point);
 
-// Return repsonse with JSON data
-echo "{ \"url\": \"https://url.hzswdef.xyz/$random_url\" }";
+$api->close();
+
+function get_server_protocol() {
+    if (isset($_SERVER['HTTPS']) && 
+        ($_SERVER['HTTPS'] == 'on' || $_SERVER['HTTPS'] == 1) ||
+        isset($_SERVER['HTTP_X_FORWARDED_PROTO']) &&
+        $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https') 
+    {
+        return 'https://';
+    }
+    else
+    {
+        return 'http://';
+    }
+}
+
+$url = get_server_protocol() . $_SERVER['HTTP_HOST'] . '/' . $short_url;
+
+// Return response with JSON data
+echo "{ \"url\": \"$url\" }";
 
 ?>
