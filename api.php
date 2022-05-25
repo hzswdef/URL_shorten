@@ -1,19 +1,5 @@
 <?php
 
-if (!isset($_GET["token"]))
-{
-    echo "No token specified.";
-    exit();
-}
-if (!isset($_GET["url"]))
-{
-    echo "Missing URL.";
-    exit();
-}
-
-$token = $_GET["token"];
-$point = $_GET["url"];
-
 class MySQL
 {
     private $conn; // database connection
@@ -114,27 +100,42 @@ class API extends MySQL
     
     public function point_validation(string $point)
     {
-        if (!preg_match("/^((https|http|ftp)\:\/\/)?([a-z0-9A-Z]+\.[a-z0-9A-Z]+\.[a-z0-9A-Z]+\.[a-zA-Z]{2,4}|[a-z0-9A-Z]+\.[a-z0-9A-Z]+\.[a-zA-Z]{2,4}|[a-z0-9A-Z]+\.[a-zA-Z]{2,4})$/i", $point)) {
-            header("HTTP/1.1 400 Bad Request");
-            
-            die("Bad URL.");
-        }
-        
         if(!$socket =@ fsockopen($point, 80, $errno, $errstr, 30)) {
             header("HTTP/1.1 400 Bad Request");
             
             die("URL not responding.");
         }
         fclose($socket);
+        
+        if (strlen($point) > 256) {
+            header("HTTP/1.1 400 Bad Request");
+            
+            die("URL too long.");
+        }
     }
 }
 
-$api = new API($token);
 
+if (!isset($_GET["token"]))
+{
+    echo "No token specified.";
+    exit();
+}
+if (!isset($_GET["url"]))
+{
+    echo "Missing URL.";
+    exit();
+}
+
+$token = $_GET["token"];
+$point = $_GET["url"];
+
+
+$api = new API($token);
 $api->point_validation($point);
 $short_url = $api->create_url($point);
-
 $api->close();
+
 
 function get_server_protocol() {
     if (isset($_SERVER['HTTPS']) && 
@@ -150,9 +151,11 @@ function get_server_protocol() {
     }
 }
 
-$url = get_serverprotocol() . $_SERVER['HTTP_HOST'] . '/' . $short_url;
+// prepare link to return
+$url = get_server_protocol() . $_SERVER['HTTP_HOST'] . '/' . $short_url;
 
-// Return response with JSON data
+
+// Return JSON response
 echo "{ \"url\": \"$url\" }";
 
 ?>
