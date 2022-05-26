@@ -4,12 +4,9 @@ require_once "lib/MySQL.class.php";
 
 class db_requests extends MySQL
 {
-    private $point;
-    
-    public function __construct(string $point)
+    public function __construct()
     {
         parent::__construct();
-        $this->point = $point;
     }
     
     protected function get_url(string $url)
@@ -24,7 +21,7 @@ class redirect extends db_requests
     
     public function __construct(string $point)
     {
-        parent::__construct($point);
+        parent::__construct();
         $this->point = $point;
     }
     
