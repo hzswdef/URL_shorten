@@ -12,7 +12,7 @@
 
 <div class="wrap">
 
-<div class="back-button" onclick="redirect_to('https://hzswdef.xyz/');">
+<div class="back-button" onclick="window.location.href='/';">
     <img src="assets/logout.png"/>
 
     <span>
@@ -29,8 +29,6 @@
 </div>
 
 </div>
-
-<script src="js/redirect.js"></script>
 
 </body>
 </html>
