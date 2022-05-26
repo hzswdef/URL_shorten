@@ -1,6 +1,6 @@
 <?php
 
-require_once "lib/MySQL.class.php";
+require_once "lib/DB/MySQL.class.php";
 
 class db_requests extends MySQL
 {

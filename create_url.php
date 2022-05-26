@@ -1,53 +1,40 @@
+<span>
+
 <?php
+
+require_once "lib/API/API.class.php";
+
+if (!isset($_POST["point"]))
+{
+    die("Missing URL.");
+}
 
 $point = $_POST["point"];
 
-// Basic url check if he is valid
-if ((strlen($point) <= 3) || (strpos($point, ".") == false))
-{
-    echo "<span class='error'>Invalid URL.</span>";
-    exit();
-}
+$api = new api(null);
+$api->point_validation($point);
+$short_url = $api->create_url($point);
+$api->close();
 
-// Remove "https://" or "http://" from $point
-$point = str_replace("https://", "", $point);
-$point = str_replace("http://", "", $point);
-
-// Connect to database
-require("lib/db.php");
-$mysql_connect = new mysqli(
-    $host,
-    $user,
-    $pass,
-    $db_name
-);
-mysqli_set_charset($mysql_connect, "utf8");
-
-function create_random_url($mysql_connect)
-{
-    $rand_chars = substr(md5(mt_rand()), 0, 5);
-    
-    // BEGIN | Check if entry with randomed code 
-    $check = $mysql_connect->query("SELECT * FROM `shorten urls` WHERE `url`='$rand_chars'");
-    $check = mysqli_fetch_array($check);
-    
-    // invoke this func again if entry with $rand_chars already exists in DB
-    if ($check !== null)
+function get_server_protocol() {
+    if (isset($_SERVER['HTTPS']) && 
+        ($_SERVER['HTTPS'] == 'on' || $_SERVER['HTTPS'] == 1) ||
+        isset($_SERVER['HTTP_X_FORWARDED_PROTO']) &&
+        $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https') 
     {
-        return create_random_url($mysql_connect);
+        return 'https://';
     }
-    // END
-    
-    return $rand_chars;
+    else
+    {
+        return 'http://';
+    }
 }
-$random_url = create_random_url($mysql_connect);
 
-// Add new "short url" entry to DB
-$result = $mysql_connect->query("INSERT INTO `shorten urls` (`url`, `point`, `token`) VALUES ('$random_url', '$point', Null)");
-
-mysqli_close($mysql_connect);
+$url = get_server_protocol() . $_SERVER['HTTP_HOST'] . '/' . $short_url;
 
 // Return response with created url
-echo "<span>Shorten URL succesfully created.<p>https://url.hzswdef.xyz/" . $random_url . "</p></span>";
+echo "Shorten URL succesfully created.<p>" . $url . "</p>";
 
 ?>
+
+</span>
