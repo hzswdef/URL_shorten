@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <base href="/" />
-    <title>hzswdef | 404 Not Found</title>
+    <title>hzswdef | 403 Access denied</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/error.css">
     <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon">
@@ -20,7 +20,7 @@
     </span>
 </div>
 
-<div class="error">
+<div class="error unselectable">
     403
     
     <span>
