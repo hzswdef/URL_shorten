@@ -20,7 +20,7 @@
     </span>
 </div>
 
-<div class="error">
+<div class="error unselectable">
     404
     
     <span>
