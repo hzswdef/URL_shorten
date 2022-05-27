@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;200&display=swap");
 @font-face {
   font-family: Dongle-Light;
   src: url(../fonts/Dongle-Light.woff);
@@ -39,22 +40,79 @@ html, body {
   background: rgba(10, 10, 20, 0.7);
 }
 
-.error {
-  display: block;
+.content-wrap {
+  display: flex;
   z-index: 2;
   background: #111111;
   box-sizing: border-box;
   border-radius: 20px;
-  padding: 15px 40px;
+}
+.content-wrap .token-div {
+  display: block;
+  margin: auto;
   line-height: 1;
-  font-size: 4.8rem;
+  color: white;
+  font-size: 2.4rem;
+}
+.content-wrap .token-div .token-btn {
+  padding: 28px 24px 23px 24px;
+  line-height: 0;
+  font-size: 2.4rem;
+  font-family: "Dongle-Light";
+  font-weight: 200;
+  border: 0.08rem solid rgba(130, 120, 140, 0.3);
+  border-radius: 16px;
+  margin: 30px 50px;
+  position: relative;
+}
+.content-wrap .token-div .token-btn .copy-btn {
+  position: absolute;
+  top: 0;
+  right: 3px;
+  padding: 5px;
+  cursor: pointer;
+  display: none;
+}
+.content-wrap .token-div .token-btn .copy-btn #copy-btn {
+  width: 13px;
+  height: 12px;
+  opacity: 0.9;
+}
+.content-wrap .token-div .token-btn #gen_token_btn {
+  cursor: pointer !important;
+  user-select: auto !important;
+  pointer-events: auto !important;
+}
+.content-wrap .docs-div {
+  z-index: 5;
+  background: linear-gradient(60deg, hsl(224deg, 85%, 66%), hsl(269deg, 85%, 66%), hsl(314deg, 85%, 66%), hsl(359deg, 85%, 66%), hsl(44deg, 85%, 66%));
+  background-size: 300% 300%;
+  animation: moveGradient 4s alternate infinite;
+  border-radius: 0 20px 20px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.content-wrap .docs-div .rotate {
+  transform: translate(-3px, 0) rotate(90deg);
+  font-size: 2.2rem;
+  color: white;
+}
+
+.notify {
+  position: absolute;
+  top: 8%;
+  left: 50%;
+  transform: translate(-50%, 0);
+  z-index: 5;
+  line-height: 1;
   color: white;
   text-align: center;
-}
-.error span {
-  font-size: 2.4rem;
-  color: #555;
-  font-family: Dongle-Light;
+  font-size: 2rem;
+  border-radius: 0 16px 0 0;
+  opacity: 0;
+  transition: opacity 800ms;
 }
 
 .back-button {
@@ -84,23 +142,36 @@ html, body {
 }
 
 @media screen and (min-width: 768px) {
-  .error {
-    font-size: 6.4rem;
-    padding: 20px 60px;
-  }
-  .error span {
-    font-size: 3.2rem;
-  }
-
   .back-button {
     border-radius: 0 16px 0 0;
     padding: 12px 36px 8px 36px;
     font-size: 2rem;
+    cursor: pointer;
   }
   .back-button img {
     height: 16px;
     margin-right: 5px;
   }
+}
+@media screen and (max-width: 500px) {
+  .token-btn {
+    padding: 23px 23px 20px 23px !important;
+    border: 0.08rem solid rgba(130, 120, 140, 0.3);
+    border-radius: 16px;
+    margin: 30px 45px !important;
+  }
+  .token-btn #res {
+    font-size: 1.8rem;
+  }
+}
+.unselectable {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  pointer-events: none;
 }
 
 /*# sourceMappingURL=token_.css.map */

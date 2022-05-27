@@ -56,7 +56,6 @@ html, body {
 }
 
 .back-button {
-    cursor: pointer;
     --border-width: 2px;
     position: absolute;
     top: 100%; left: 0;
@@ -109,6 +108,7 @@ html, body {
         }
     }
 }
+
 .unselectable {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -117,4 +117,8 @@ html, body {
     -ms-user-select: none;
     user-select: none;
     pointer-events: none;
+}
+
+@keyframes moveGradient {
+    50% { background-position: 100% 50%; }
 }

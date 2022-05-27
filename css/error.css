@@ -58,7 +58,6 @@ html, body {
 }
 
 .back-button {
-  cursor: pointer;
   --border-width: 2px;
   position: absolute;
   top: 100%;
@@ -111,6 +110,12 @@ html, body {
   -ms-user-select: none;
   user-select: none;
   pointer-events: none;
+}
+
+@keyframes moveGradient {
+  50% {
+    background-position: 100% 50%;
+  }
 }
 
 /*# sourceMappingURL=error.css.map */
