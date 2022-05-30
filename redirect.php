@@ -44,8 +44,14 @@ class redirect extends db_requests
         }
         
         //
-        // MUST FIX IT
+        // MUST ADD OTHER PROTOCOLS OR ANOTHER SOLUTION
         //
+        if (strpos($data["point"], "https://") !== false) {
+            return header("Location: " . $data["point"]);
+        }
+        else if (strpos($data["point"], "http://") !== false) {
+            return header("Location: " . $data["point"]);
+        }
         return header("Location: https://" . $data["point"]);
     }
 }
