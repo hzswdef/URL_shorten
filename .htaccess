@@ -2,7 +2,7 @@ DirectoryIndex index.php
 
 AddDefaultCharset UTF-8
 
-ErrorDocument 404 /redirect.php
+ErrorDocument 404 /lib/redirect.php
 ErrorDocument 403 /403.php
 
 RewriteEngine On

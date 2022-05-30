@@ -12,7 +12,7 @@ class MySQL
     private static function db_connect()
     {
         // database config
-        require("lib/DB/db.php");
+        require($_SERVER['DOCUMENT_ROOT'] . "/lib/DB/db.php");
         
         mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
         try {

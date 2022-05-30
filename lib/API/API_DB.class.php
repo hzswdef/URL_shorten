@@ -1,6 +1,6 @@
 <?php
 
-require_once "lib/DB/MySQL.class.php";
+require_once $_SERVER['DOCUMENT_ROOT'] . "/lib/DB/MySQL.class.php";
 
 class API_DB extends MySQL
 {

@@ -1,6 +1,6 @@
 $('#send_request').click(function() {
     $.ajax({
-        url: 'create_url.php',
+        url: 'lib/create_url.php',
         type: 'POST',
         data: {
             point: $('#url-input').val()

@@ -2,7 +2,7 @@
 
 <?php
 
-require_once "lib/API/API.class.php";
+require_once $_SERVER['DOCUMENT_ROOT'] . "/lib/API/API.class.php";
 
 if (!isset($_POST["point"]))
 {

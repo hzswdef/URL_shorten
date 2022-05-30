@@ -1,6 +1,6 @@
 <?php
 
-require_once "lib/API/API_DB.class.php";
+require_once $_SERVER['DOCUMENT_ROOT'] . "/lib/API/API_DB.class.php";
 
 class API extends API_DB
 {

@@ -23,7 +23,7 @@ function copy(selector) {
 
 $('#gen_token_btn').click(function() {
     $.ajax({
-        url: 'generate_token.php',
+        url: '/lib/generate_token.php',
         type: 'POST',
         success: function(data) {
             if (uses == 0) {
