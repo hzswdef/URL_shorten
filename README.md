@@ -19,6 +19,4 @@ Example of GET Request - `http://domain.com/api?token=TOKEN&url=URL`
   "url": "http://domain.com/xDrTU"
 }
 ```
-<sub>Free token - `_free_xDghTkL28p`.</sub>
-
 <sub>**API** represented in `api.php`.</sub>
