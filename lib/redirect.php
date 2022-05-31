@@ -40,7 +40,7 @@ class redirect extends db_requests
         $data = $this->get_data();
         
         if ($data == null) {
-            die(include_once("404.php"));
+            die(include_once($_SERVER['DOCUMENT_ROOT'] . "/404.php"));
         }
         
         //
