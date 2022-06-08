@@ -20,160 +20,111 @@ html, body {
 .wrap {
   width: 100%;
   height: 100%;
+  background: #999999;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #111;
-}
-
-.main-block {
-  display: block;
-  z-index: 2;
-  width: 90%;
   background-image: url(../assets/background.png);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  z-index: 1;
   position: relative;
-  border-radius: 20px;
-  box-shadow: 0px 0px 15px 15px rgba(10, 10, 30, 0.5);
 }
-.main-block .form {
-  z-index: 4;
-  position: relative;
+.wrap::after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: rgba(10, 10, 20, 0.7);
+}
+
+.main {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  padding: 20px 0;
-}
-.main-block .form input, .main-block .form button {
-  border: None;
-  margin: 0 0 10px 0;
-  line-height: 1;
-}
-.main-block .form input:focus, .main-block .form button:focus {
-  outline: None;
-}
-.main-block .form #url-input {
-  font-family: Dongle-Light;
-  font-size: 1.6rem;
-  color: white;
-  line-height: 0.5;
-  border-radius: 15px;
-  border: 0.1rem solid white;
-  background: None;
-  padding: 5px 20px;
+  z-index: 2;
+  background: #111111;
   box-sizing: border-box;
-  width: 90%;
+  border-radius: 20px;
+  line-height: 1;
+  color: white;
 }
-.main-block .form #send_request {
-  font-family: Dongle-Regular;
-  font-size: 1.6rem;
+.main .input-bl {
+  padding: 32px 48px;
+}
+.main .input-bl input {
+  padding: 9px 16px;
+  border-radius: 16px;
+  border: 0.08rem solid rgba(130, 120, 140, 0.3);
+  background: none;
+  font-size: 1.4rem;
+  width: 16rem;
   color: white;
   line-height: 1;
-  padding: 5px 15px;
-  color: #fdfdfd;
-  border: 0.1rem solid white;
-  border-radius: 15px;
-  background: None;
+}
+.main .button-bl {
+  background: linear-gradient(60deg, hsl(224deg, 85%, 66%), hsl(269deg, 85%, 66%), hsl(314deg, 85%, 66%), hsl(359deg, 85%, 66%), hsl(44deg, 85%, 66%));
+  background-size: 300% 300%;
+  animation: moveGradient 4s alternate infinite;
+  border-radius: 0 20px 20px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
 }
-.main-block .form .url-counter {
-  font-family: Dongle-Regular;
-  font-size: 1.6rem;
+.main .button-bl .rotate {
+  transform: translate(-3px, 0) rotate(90deg);
+  font-size: 1.9rem;
   color: white;
+}
+
+.back-button {
+  --border-width: 2px;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  transform: translate(0, -100%);
+  z-index: 5;
   line-height: 1;
-}
-.main-block::after {
-  content: "";
-  z-index: 3;
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(10, 10, 30, 0.7);
-  border-radius: 20px;
-}
-
-#loading-screen {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-image: linear-gradient(-105deg, #009acc, #363795);
-  z-index: 1337;
-  transition: all 1s ease-out;
-}
-
-.spinner {
-  animation: rotate 2s linear infinite;
-  z-index: 2;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin: -25px 0 0 -25px;
-  width: 50px;
-  height: 50px;
-}
-.spinner .path {
-  stroke: hsl(210deg, 70%, 75%);
-  stroke-linecap: round;
-  animation: dash 1.5s ease-in-out infinite;
-}
-
-#msg_box {
-  position: absolute;
-  left: 50%;
-  top: 10px;
-  width: 320px;
-  transform: translateX(-50%);
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  text-align: center;
-}
-#msg_box .error {
-  border: 0.1rem solid red !important;
-}
-#msg_box span {
-  padding: 5px 10px;
-  border: 0.1rem solid lime;
-  border-radius: 15px;
   color: white;
-  font-family: Dongle-Regular;
+  border-radius: 0 16px 0 0;
+  display: inline-block;
+  vertical-align: middle;
+  background: linear-gradient(60deg, hsl(224deg, 85%, 66%), hsl(269deg, 85%, 66%), hsl(314deg, 85%, 66%), hsl(359deg, 85%, 66%), hsl(44deg, 85%, 66%));
+  background-size: 300% 300%;
+  animation: moveGradient 4s alternate infinite;
+  border-radius: 0 15px 0 0;
+  padding: 10px 24px 8px 24px;
   font-size: 1.2rem;
-  margin: 0 0 10px 0;
 }
-#msg_box span p {
-  font-family: Dongle-Light;
-  font-size: 1rem;
+.back-button img {
+  height: 12px;
+  margin: 2px 5px 0 0;
+  vertical-align: middle;
+  transform: translate(0, -2px);
 }
 
-@keyframes rotate {
-  100% {
-    transform: rotate(360deg);
+@media screen and (max-width: 560px) {
+  .main .input-bl {
+    padding: 32px;
+  }
+  .main .input-bl input {
+    font-size: 1.1rem;
+    width: 15rem;
+    padding: 6px 12px;
+  }
+  .main .button-bl .rotate {
+    font-size: 1.6rem;
   }
 }
-@keyframes dash {
-  0% {
-    stroke-dasharray: 1, 150;
-    stroke-dashoffset: 0;
+@media screen and (min-width: 560px) {
+  .back-button {
+    border-radius: 0 16px 0 0;
+    padding: 12px 36px 8px 36px;
+    font-size: 2rem;
   }
-  50% {
-    stroke-dasharray: 90, 150;
-    stroke-dashoffset: -35;
-  }
-  100% {
-    stroke-dasharray: 90, 150;
-    stroke-dashoffset: -124;
-  }
-}
-@keyframes moveGradient {
-  50% {
-    background-position: 100% 50%;
+  .back-button img {
+    height: 16px;
+    margin-right: 5px;
   }
 }
 .unselectable {
@@ -186,12 +137,10 @@ html, body {
   pointer-events: none;
 }
 
-button.active.focus, button.active:focus,
-button.focus, button:active.focus,
-button:active:focus, button:focus {
-  outline: none;
-  box-shadow: none;
-  background-color: white;
+@keyframes moveGradient {
+  50% {
+    background-position: 100% 50%;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */

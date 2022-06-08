@@ -12,23 +12,21 @@
 
 <div class="wrap">
 
-<div id="loading-screen">
-    <svg class="spinner" viewBox="0 0 50 50">
-        <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
-    </svg>
+<div class="back-button" onclick="window.location.href='/token';">
+    <img src="assets/API.png"/>
+
+    <span>
+        API
+    </span>
 </div>
 
-<div id="msg_box"></div>
-
-<div class="main-block">
-    <div class="form">
+<div class="main unselectable">
+    <div class="input-bl">
         <input id="url-input" placeholder="example.xyz">
-        
-        <button id="send_request">shorten</button>
-        
-        <span class="url-counter unselectable">
-            <? echo "yo"; ?>
-        </span>
+    </div>
+    
+    <div class="button-bl">
+        <div class="rotate">Shorten</div>
     </div>
 </div>
 
