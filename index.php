@@ -12,6 +12,8 @@
 
 <div class="wrap">
 
+<div id="msg_box"></div>
+
 <div class="back-button" onclick="window.location.href='/token';">
     <img src="assets/API.png"/>
 
@@ -20,12 +22,12 @@
     </span>
 </div>
 
-<div class="main unselectable">
+<div class="main">
     <div class="input-bl">
         <input id="url-input" placeholder="example.xyz">
     </div>
     
-    <div class="button-bl">
+    <div class="button-bl" id="send_request">
         <div class="rotate">Shorten</div>
     </div>
 </div>
@@ -35,6 +37,19 @@
 <script src="js/jquery-3.6.0.js"></script>
 <script src="js/loading.js"></script>
 <script src="js/send_request.js"></script>
+<script>
+    var scrolled = false;
+    function updateScroll(){
+        if(!scrolled){
+            var element = document.getElementById("msg_box");
+            element.scrollTop = element.scrollHeight;
+        }
+    }
+    
+    $("#msg_box").on('scroll', function(){
+        scrolled=true;
+    });
+</script>
 
 </body>
 </html>

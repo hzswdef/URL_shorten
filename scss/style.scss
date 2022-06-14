@@ -153,6 +153,39 @@ html, body {
     }
 }
 
+#msg_box {
+    position: absolute;
+    left: 50%; top: 10px;
+    width: 320px; max-height: 30%;
+    overflow-y: scroll;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    z-index: 5;
+    
+    & .error {
+        border: .1rem solid red !important;
+    }
+    
+    & span {
+        padding: 5px 10px;
+        border: .1rem solid lime;
+        border-radius: 15px;
+        color: white;
+        font-family: Dongle-Regular;
+        font-size: 1.2rem;
+        margin: 0 0 10px 0;
+        
+
+        & p {
+            font-family: Dongle-Light;
+            font-size: 1rem;
+        }
+    }
+}
+
 .unselectable {
     -webkit-touch-callout: none;
     -webkit-user-select: none;

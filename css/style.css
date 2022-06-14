@@ -127,6 +127,37 @@ html, body {
     margin-right: 5px;
   }
 }
+#msg_box {
+  position: absolute;
+  left: 50%;
+  top: 10px;
+  width: 320px;
+  max-height: 30%;
+  overflow-y: scroll;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  z-index: 5;
+}
+#msg_box .error {
+  border: 0.1rem solid red !important;
+}
+#msg_box span {
+  padding: 5px 10px;
+  border: 0.1rem solid lime;
+  border-radius: 15px;
+  color: white;
+  font-family: Dongle-Regular;
+  font-size: 1.2rem;
+  margin: 0 0 10px 0;
+}
+#msg_box span p {
+  font-family: Dongle-Light;
+  font-size: 1rem;
+}
+
 .unselectable {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
