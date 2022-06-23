@@ -15,7 +15,7 @@
 <div id="msg_box"></div>
 
 <div class="back-button" onclick="window.location.href='/token';">
-    <img src="assets/API.png"/>
+    <img src="assets/api.png"/>
 
     <span>
         API
