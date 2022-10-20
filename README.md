@@ -2,8 +2,6 @@
 
 My first **PHP-project.** 
 
-https://url.hzswdef.xyz/
-
 ##### Used technologies:
 - HTML
 - CSS <sup><sub>( SASS )</sub></sup>
