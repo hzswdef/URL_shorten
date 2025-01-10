@@ -1,16 +1,16 @@
 # URL_shorter
 
-My first **PHP-project.** 
+My first-ever pet project. 
 
-##### Used technologies:
+### Stack:
 - HTML
 - CSS <sup><sub>( SASS )</sub></sup>
-- JavaScript <sup><sub>( JQuery, AJAX-requests )</sub></sup>
+- JavaScript <sup><sub>( JQuery )</sub></sup>
 - PHP
 - SQL <sup><sub>(MySQL)</sub></sup>
 
-##### API:
-Example of GET Request - `http://domain.com/api?token=TOKEN&url=URL`
+### API:
+Example of GET Request - `/api?token={TOKEN}&url={URL}`
 ```js
 /* JSON Response */
 {
